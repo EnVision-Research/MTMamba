@@ -4,7 +4,7 @@ This repository contains codes and models for the following paper:
 
 > Baijiong Lin, Weisen Jiang, Pengguang Chen, Yu Zhang, Shu Liu, and Ying-Cong Chen. MTMamba: Enhancing Multi-Task Dense Scene Understanding by Mamba-Based Decoders. In *European Conference on Computer Vision*, 2024.
 
--------
+
 
 ## Requirements:
 
@@ -65,5 +65,3 @@ If you found this code/work to be useful in your own research, please cite the f
   year={2024}
 }
 ```
-
-
