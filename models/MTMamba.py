@@ -56,7 +56,6 @@ class MTMamba(nn.Module):
                                     )
             self.final_project[t] = nn.Conv2d(self.feature_channel[0], p.TASKS.NUM_OUTPUT[t], 1, 1, 0, bias=True)
 
-        # if use_ctm:
         self.block_3 = nn.ModuleDict()
         for stage in range(len(self.feature_channel) - 1):
             skip_channel = self.feature_channel[::-1][stage+1]
