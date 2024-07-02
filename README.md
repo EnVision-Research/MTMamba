@@ -6,7 +6,7 @@ This repository contains codes and models for the following paper:
 
 
 
-## Requirements:
+## Requirements
 
 - PyTorch 2.0.0
 
