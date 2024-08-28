@@ -1,10 +1,10 @@
 # MTMamba
 
-This repository contains codes and models for the following paper:
+This repository contains codes and models for the following papers:
 
 > Baijiong Lin, Weisen Jiang, Pengguang Chen, Yu Zhang, Shu Liu, and Ying-Cong Chen. MTMamba: Enhancing Multi-Task Dense Scene Understanding by Mamba-Based Decoders. In *European Conference on Computer Vision*, 2024.
 
-
+> Baijiong Lin, Weisen Jiang, Pengguang Chen, Shu Liu, and Ying-Cong Chen. MTMamba++: Enhancing Multi-Task Dense Scene Understanding via Mamba-Based Decoders. *arXiv preprint arXiv:2408.15101*, 2024.
 
 ## Requirements
 
@@ -38,7 +38,7 @@ This repository contains codes and models for the following paper:
    python -m torch.distributed.launch --nproc_per_node 8 main.py --run_mode train --config_exp ./configs/mtmamba_nyud.yml 
    ```
 
-        You can download the pretrained models from [mtmamba_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EdP6lzTOEIRLggFVLlbzPWUBZrsRPoEkdtNpYjm_H2K54A?e=ekeobz), [mtmamba_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/ET0zoRo2mq9OoYJlHZZy2eQB5lh6W-yayKzih6ejwD7awQ?e=DUZFGE).
+        You can download the pretrained models from [mtmamba_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EdP6lzTOEIRLggFVLlbzPWUBZrsRPoEkdtNpYjm_H2K54A?e=IwsaaG), [mtmamba_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/ET0zoRo2mq9OoYJlHZZy2eQB5lh6W-yayKzih6ejwD7awQ?e=DUZFGE), [mtmamba_plus_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/Ecjm9MJ5SwBGlPfg4YAxGGABagrzm81LM_TI3h6jADkpvA?e=KePvfD), [mtmamba_plus_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EaVpHcqrNihIsfyMeyPR614BpzSrk2ubRSIdBUHLcwZTjA?e=DpRajc).
 
 4. Evaluation. You can run the following command,
    
@@ -59,9 +59,16 @@ If you found this code/work to be useful in your own research, please cite the f
 
 ```latex
 @inproceedings{lin2024mtmamba,
-  title={{MTM}amba: Enhancing Multi-Task Dense Scene Understanding by Mamba-Based Decoders},
+  title={{MTMamba}: Enhancing Multi-Task Dense Scene Understanding by Mamba-Based Decoders},
   author={Lin, Baijiong and Jiang, Weisen and Chen, Pengguang and Zhang, Yu and Liu, Shu and Chen, Ying-Cong},
   booktitle={European Conference on Computer Vision},
+  year={2024}
+}
+
+@article{lin2024mtmambaplus,
+  title={{MTMamba++}: Enhancing Multi-Task Dense Scene Understanding via Mamba-Based Decoders},
+  author={Lin, Baijiong and Jiang, Weisen and Chen, Pengguang and Liu, Shu and Chen, Ying-Cong},
+  journal={arXiv preprint arXiv:2408.15101},
   year={2024}
 }
 ```

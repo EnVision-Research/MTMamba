@@ -29,6 +29,10 @@ def get_model(p):
         backbone, backbone_channels = get_backbone(p)
         from models.MTMamba import MTMamba
         model = MTMamba(p, backbone)
+    elif p['model'] == 'MTMamba_plus':
+        backbone, backbone_channels = get_backbone(p)
+        from models.MTMamba_plus import MTMamba_plus
+        model = MTMamba_plus(p, backbone)
     else:
         raise NotImplementedError('Unknown model {}'.format(p['model']))
     return model
