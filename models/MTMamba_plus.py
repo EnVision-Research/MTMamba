@@ -262,6 +262,7 @@ class MTMamba_plus(nn.Module):
         self.tasks = p.TASKS.NAMES
         self.backbone = backbone
         self.feature_channel = backbone.num_features
+        self.img_size = p.IMAGE_ORI_SIZE
 
         each_stage_depth = 3
         stage_num = len(self.feature_channel) - 1
@@ -342,7 +343,7 @@ class MTMamba_plus(nn.Module):
 
 
     def forward(self, x):
-        img_size = x.size()[-2:]
+        # img_size = x.size()[-2:]
 
         # Backbone 
         selected_fea = self.backbone(x)
@@ -358,6 +359,6 @@ class MTMamba_plus(nn.Module):
         for t in self.tasks:
             z = self.final_expand[t](x_dict[t])
             z = self.final_project[t](z)
-            out[t] = F.interpolate(z, img_size, mode=INTERPOLATE_MODE)
+            out[t] = F.interpolate(z, self.img_size, mode=INTERPOLATE_MODE)
 
         return out

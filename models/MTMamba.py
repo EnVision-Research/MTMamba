@@ -12,6 +12,7 @@ class MTMamba(nn.Module):
         self.tasks = p.TASKS.NAMES
         self.backbone = backbone
         self.feature_channel = backbone.num_features
+        self.img_size = p.IMAGE_ORI_SIZE
 
         total_depth = 3
         dpr = [x.item() for x in torch.linspace(0.2, 0, (len(self.feature_channel)-1)*total_depth)]
@@ -97,7 +98,7 @@ class MTMamba(nn.Module):
         return self.block_3[f'{stage}'](x_dict)
 
     def forward(self, x):
-        img_size = x.size()[-2:]
+        # img_size = x.size()[-2:]
 
         # Backbone 
         selected_fea = self.backbone(x)
@@ -114,6 +115,6 @@ class MTMamba(nn.Module):
         for t in self.tasks:
             z = self.final_expand[t](x_dict[t])
             z = self.final_project[t](z.permute(0,3,1,2))
-            out[t] = F.interpolate(z, img_size, mode=INTERPOLATE_MODE)
+            out[t] = F.interpolate(z, self.img_size, mode=INTERPOLATE_MODE)
 
         return out

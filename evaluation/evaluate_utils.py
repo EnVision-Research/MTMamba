@@ -20,6 +20,10 @@ def count_improvement(dataset_name, eval_results, task_list):
         base_result_dict = {'semseg': 80.89, 'human_parts': 71.71, 'sal': 85.28, 'normals': 13.47, 'edge': 0.04}
         task_metric = {'semseg': 'mIoU', 'human_parts': 'mIoU', 'sal': 'maxF', 'normals': 'mean', 'edge': 'loss'}
         weight_dict = {'semseg': 1, 'human_parts': 1, 'sal': 1, 'normals': 0, 'edge': 0}
+    elif dataset_name == 'Cityscapes':
+        base_result_dict = {'semseg': 80, 'depth': 1}
+        task_metric = {'semseg': 'mIoU', 'depth': 'rmse'}
+        weight_dict = {'semseg': 1, 'depth': 0}
     else:
         raise ValueError
 
@@ -80,7 +84,7 @@ def get_single_task_meter(p, database, task):
 
     elif task == 'depth':
         from evaluation.eval_depth import DepthMeter
-        return DepthMeter(ignore_index=p.ignore_index) 
+        return DepthMeter(ignore_index=p.ignore_index, max_depth=p.TASKS.depth_max, min_depth=p.TASKS.depth_min) 
 
     elif task == 'edge': # just for reference
         from evaluation.eval_edge import EdgeMeter

@@ -69,7 +69,7 @@ def get_transformations(p):
         return train_transforms, valid_transforms
 
     else:
-        return None, None, None
+        return None, None
 
 
 def get_train_dataset(p, transforms=None):
@@ -95,6 +95,11 @@ def get_train_dataset(p, transforms=None):
                                     do_normals='normals' in p.TASKS.NAMES, 
                                     do_depth='depth' in p.TASKS.NAMES, overfit=False)
 
+    if db_name == 'Cityscapes':
+        from data.cityscapes import CITYSCAPES
+        database = CITYSCAPES(p, p.db_paths['Cityscapes'], split=["train"], is_transform=True,
+                    img_size=p.TRAIN.SCALE, augmentations=None, 
+                    task_list=p.TASKS.NAMES)
 
     return database
 
@@ -129,6 +134,12 @@ def get_test_dataset(p, transforms=None):
                                     do_semseg='semseg' in p.TASKS.NAMES, 
                                     do_normals='normals' in p.TASKS.NAMES, 
                                     do_depth='depth' in p.TASKS.NAMES)
+
+    elif db_name == 'Cityscapes':
+        from data.cityscapes import CITYSCAPES
+        database = CITYSCAPES(p, p.db_paths['Cityscapes'], split=["val"], is_transform=True,
+                    img_size=p.TEST.SCALE, augmentations=None, 
+                    task_list=p.TASKS.NAMES)
 
     else:
         raise NotImplemented("test_db_name: Choose among PASCALContext and NYUD")

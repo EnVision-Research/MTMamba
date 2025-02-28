@@ -1,0 +1,38 @@
+# Setup
+version_name: mtmamba_city
+out_dir: "./"
+
+# Database
+train_db_name: Cityscapes
+val_db_name: Cityscapes
+trBatch: 1
+valBatch: 4
+nworkers: 2
+ignore_index: 255
+
+# Optimizer and scheduler
+intermediate_supervision: False
+val_interval: 1000
+epochs: 999999
+max_iter: 40000
+optimizer: adamw
+optimizer_kwargs:
+   lr: 0.0001
+   weight_decay: 0.000001
+scheduler: poly
+
+# Model
+model: MTMamba
+backbone: swin_large
+
+# Tasks
+task_dictionary:
+   include_semseg: True
+   include_depth: True
+
+# Loss kwargs
+loss_kwargs:
+   loss_scheme: log
+   loss_weights:
+       semseg: 1.0
+       depth: 1.0

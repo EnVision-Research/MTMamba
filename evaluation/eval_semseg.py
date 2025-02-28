@@ -32,6 +32,11 @@ NYU_CATEGORY_NAMES = ['wall', 'floor', 'cabinet', 'bed', 'chair',
                       'person', 'night stand', 'toilet', 'sink', 'lamp',
                       'bathtub', 'bag', 'otherstructure', 'otherfurniture', 'otherprop']
 
+CITYSCAPES_CATEGORY_NAMES = ['road', 'sidewalk', 'building', 'wall', 'fence',\
+                    'pole', 'traffic_light', 'traffic_sign', 'vegetation', 'terrain',\
+                    'sky', 'person', 'rider', 'car', 'truck', 'bus', 'train', \
+                    'motorcycle', 'bicycle']
+
 class SemsegMeter(object):
     def __init__(self, database, ignore_idx=255):
         ''' "marco" way in ATRC evaluation code.
@@ -44,6 +49,11 @@ class SemsegMeter(object):
         elif database == 'NYUD':
             n_classes = 40
             cat_names = NYU_CATEGORY_NAMES
+            has_bg = False
+
+        elif database == 'Cityscapes':
+            n_classes = 19
+            cat_names = CITYSCAPES_CATEGORY_NAMES
             has_bg = False
 
         else:

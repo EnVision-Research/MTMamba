@@ -34,6 +34,8 @@ def parse_task_dictionary(db_name, task_dictionary):
             task_cfg.NUM_OUTPUT[tmp] = 21
         elif db_name == 'NYUD':
             task_cfg.NUM_OUTPUT[tmp] = 40
+        elif db_name == 'Cityscapes':
+            task_cfg.NUM_OUTPUT[tmp] = 19
         else:
             raise NotImplementedError
         task_cfg.FLAGVALS[tmp] = cv2.INTER_NEAREST 
@@ -45,6 +47,13 @@ def parse_task_dictionary(db_name, task_dictionary):
         task_cfg.NUM_OUTPUT[tmp] = 1
         task_cfg.FLAGVALS[tmp] = cv2.INTER_NEAREST
         task_cfg.INFER_FLAGVALS[tmp] = cv2.INTER_LINEAR
+
+        if db_name == 'Cityscapes':
+            task_cfg.depth_max = 80.0
+            task_cfg.depth_min = 0.
+        else:
+            task_cfg.depth_max = None
+            task_cfg.depth_min = None
 
     if 'include_human_parts' in task_dictionary.keys() and task_dictionary['include_human_parts']:
         # Human Parts Segmentation
@@ -114,14 +123,20 @@ def create_config(exp_file, params):
         cfg.TRAIN.SCALE = (512, 512)
         cfg.TEST = edict()
         cfg.TEST.SCALE = (512, 512)
+        cfg.IMAGE_ORI_SIZE = (512, 512)
 
     elif cfg['train_db_name'] == 'NYUD':
         cfg.TRAIN = edict()
         cfg.TEST = edict()
-        # cfg.TRAIN.SCALE = (425, 560)
-        # cfg.TEST.SCALE = (425, 560)
+        cfg.IMAGE_ORI_SIZE = (448, 576)
         cfg.TRAIN.SCALE = (448, 576)
         cfg.TEST.SCALE = (448, 576)
+    elif cfg['train_db_name'] == 'Cityscapes':
+        cfg.IMAGE_ORI_SIZE = (1024, 2048)
+        cfg.TRAIN = edict()
+        cfg.TRAIN.SCALE = (512, 1024)
+        cfg.TEST = edict()
+        cfg.TEST.SCALE = (512, 1024) # original size
 
     else:
         raise NotImplementedError

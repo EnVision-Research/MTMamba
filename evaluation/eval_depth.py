@@ -17,11 +17,13 @@ import json
 import scipy.io as sio
 
 class DepthMeter(object):
-    def __init__(self, ignore_index=255):
+    def __init__(self, ignore_index=255, max_depth=None, min_depth=None):
         self.total_rmses = 0.0
         self.total_log_rmses = 0.0
         self.n_valid = 0.0
         self.ignore_index = ignore_index
+        self.max_depth = max_depth
+        self.min_depth = min_depth
 
         self.abs_rel = 0.0
         self.sq_rel = 0.0
@@ -31,7 +33,10 @@ class DepthMeter(object):
         pred, gt = pred.squeeze(), gt.squeeze()
         
         # Determine valid mask
-        mask = (gt != self.ignore_index).bool()
+        if self.max_depth is not None and self.min_depth is not None:
+            mask = torch.logical_and(gt < self.max_depth, gt > self.min_depth)
+        else:
+            mask = (gt != self.ignore_index).bool()
         self.n_valid += mask.float().sum().item() # Valid pixels per image
         
         # Only positive depth values are possible
