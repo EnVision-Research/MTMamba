@@ -4,7 +4,7 @@ This repository contains codes and models for the following papers:
 
 > Baijiong Lin, Weisen Jiang, Pengguang Chen, Yu Zhang, Shu Liu, and Ying-Cong Chen. MTMamba: Enhancing Multi-Task Dense Scene Understanding by Mamba-Based Decoders. In *European Conference on Computer Vision*, 2024.
 
-> Baijiong Lin, Weisen Jiang, Pengguang Chen, Shu Liu, and Ying-Cong Chen. MTMamba++: Enhancing Multi-Task Dense Scene Understanding via Mamba-Based Decoders. *arXiv preprint arXiv:2408.15101*, 2024.
+> Baijiong Lin, Weisen Jiang, Pengguang Chen, Shu Liu, and Ying-Cong Chen. MTMamba++: Enhancing Multi-Task Dense Scene Understanding via Mamba-Based Decoders. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2025.
 
 ## Requirements
 
@@ -65,10 +65,10 @@ If you found this code/work to be useful in your own research, please cite the f
   year={2024}
 }
 
-@article{lin2024mtmambaplus,
+@article{lin2025mtmambaplus,
   title={{MTMamba++}: Enhancing Multi-Task Dense Scene Understanding via Mamba-Based Decoders},
   author={Lin, Baijiong and Jiang, Weisen and Chen, Pengguang and Liu, Shu and Chen, Ying-Cong},
-  journal={arXiv preprint arXiv:2408.15101},
-  year={2024}
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2025}
 }
 ```
