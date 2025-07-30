@@ -30,21 +30,34 @@ This repository contains codes and models for the following papers:
    cd ../
    ```
 
-2. Download the data from [PASCALContext.tar.gz](https://hkustconnect-my.sharepoint.com/:u:/g/personal/hyeae_connect_ust_hk/ER57KyZdEdxPtgMCai7ioV0BXCmAhYzwFftCwkTiMmuM7w?e=2Ex4ab), [NYUDv2.tar.gz](https://hkustconnect-my.sharepoint.com/:u:/g/personal/hyeae_connect_ust_hk/EZ-2tWIDYSFKk7SCcHRimskBhgecungms4WFa_L-255GrQ?e=6jAt4c), and then extract them. You need to modify the dataset directory as ```db_root``` variable in ```configs/mypath.py```.
+2. Prepare the data.
 
-3. Train the model. Taking training NYUDv2 as an example, you can run the following command
+    **PASCAL-Context and NYUD-v2**: download the data from [PASCALContext.tar.gz](https://hkustconnect-my.sharepoint.com/:u:/g/personal/hyeae_connect_ust_hk/ER57KyZdEdxPtgMCai7ioV0BXCmAhYzwFftCwkTiMmuM7w?e=2Ex4ab), [NYUDv2.tar.gz](https://hkustconnect-my.sharepoint.com/:u:/g/personal/hyeae_connect_ust_hk/EZ-2tWIDYSFKk7SCcHRimskBhgecungms4WFa_L-255GrQ?e=6jAt4c), and then extract them.
+
+   **Cityscapes**: please sign up on the [official Cityscapes website](https://www.cityscapes-dataset.com/) and download the following files (leftImg8bit_trainvaltest.zip, gtFine_trainvaltest.zip, and disparity_trainvaltest.zip).
+
+     You need to modify the dataset directory as ```db_root``` variable in ```configs/mypath.py```.
+
+4. Train the model. Taking training NYUDv2 as an example, you can run the following command
    
    ```shell
    python -m torch.distributed.launch --nproc_per_node 8 main.py --run_mode train --config_exp ./configs/mtmamba_nyud.yml 
    ```
 
-        You can download the pretrained models from [mtmamba_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EdP6lzTOEIRLggFVLlbzPWUBZrsRPoEkdtNpYjm_H2K54A?e=IwsaaG), [mtmamba_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/ET0zoRo2mq9OoYJlHZZy2eQB5lh6W-yayKzih6ejwD7awQ?e=DUZFGE), [mtmamba_cityscapes.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EVfY4W2qn85Ihe8rANBiKisBM0xxGn4OnmuOjRJ9FWNGeA?e=TsyE5B), [mtmamba_plus_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/Ecjm9MJ5SwBGlPfg4YAxGGABagrzm81LM_TI3h6jADkpvA?e=KePvfD), [mtmamba_plus_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EaVpHcqrNihIsfyMeyPR614BpzSrk2ubRSIdBUHLcwZTjA?e=DpRajc), [mtmamba_plus_cityscapes.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EZHHVmXbGChFsvyorMKOvncBU06opYPC0FuVCg8X8Yg8gw?e=8lnvdI).
+        You can download our trained models from 
+        
+| NYUD-v2 | PASCAL-Context | Cityscapes |
+|-------|-------|-------|
+| [mtmamba_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EdP6lzTOEIRLggFVLlbzPWUBZrsRPoEkdtNpYjm_H2K54A?e=IwsaaG) | [mtmamba_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/ET0zoRo2mq9OoYJlHZZy2eQB5lh6W-yayKzih6ejwD7awQ?e=DUZFGE) | [mtmamba_cityscapes.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EVfY4W2qn85Ihe8rANBiKisBM0xxGn4OnmuOjRJ9FWNGeA?e=TsyE5B) |
+| [mtmamba_plus_nyud.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/Ecjm9MJ5SwBGlPfg4YAxGGABagrzm81LM_TI3h6jADkpvA?e=KePvfD) | [mtmamba_plus_pascal.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EaVpHcqrNihIsfyMeyPR614BpzSrk2ubRSIdBUHLcwZTjA?e=DpRajc) | [mtmamba_plus_cityscapes.pth.tar](https://hkustgz-my.sharepoint.com/:u:/g/personal/blin241_connect_hkust-gz_edu_cn/EZHHVmXbGChFsvyorMKOvncBU06opYPC0FuVCg8X8Yg8gw?e=8lnvdI) |
 
 4. Evaluation. You can run the following command,
    
    ```shell
    python -m torch.distributed.launch --nproc_per_node 1 main.py --run_mode infer --config_exp ./configs/mtmamba_nyud.yml --trained_model ./ckpts/mtmamba_nyud.pth.tar
    ```
+
+   The evaluation of Boundary Detection Task is based on [external codebase](https://github.com/prismformore/Boundary-Detection-Evaluation-Tools) (which is Matlab-based).
 
 Acknowledgement
 ---------------
